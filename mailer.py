@@ -245,6 +245,19 @@ class LetterPDFBuilder:
         # Generate all pages
         self._generate_pages()
 
+        # Check if actual page count differs from calculated
+        # This can happen due to dynamic content in additional elements
+        if self.page_count > self.total_pages:
+            # Update total pages to match actual count
+            self.total_pages = self.page_count
+
+            # Regenerate with correct page count in footers
+            self.buffer = BytesIO()
+            self.canvas = canvas.Canvas(self.buffer, pagesize=letter)
+            self._set_document_properties()
+            self.page_count = 0
+            self._generate_pages()
+
         # Save and return PDF
         self.canvas.save()
         pdf = self.buffer.getvalue()
@@ -258,9 +271,8 @@ class LetterPDFBuilder:
         self.canvas.setSubject(self.config.content.subject or "Letter")
 
     def _calculate_total_pages(self) -> int:
-        """Calculate total pages needed for the content"""
+        """Calculate total pages needed for the content - accounts for orphan prevention"""
         # Do a dry run to count actual pages needed
-        temp_canvas = canvas.Canvas(BytesIO(), pagesize=letter)
         temp_page_count = 1
 
         # Calculate first page content
@@ -272,30 +284,76 @@ class LetterPDFBuilder:
         current_y -= self.config.formatting.font_size * self.config.formatting.line_spacing * 1.5
 
         # Calculate space needed for body paragraphs
-        x = self.config.positioning.margins.left * inch
         max_width = (self.page_width - self.config.positioning.margins.left * inch -
                     self.config.positioning.margins.right * inch)
         bottom_margin = 0.75 * inch  # Use same bottom margin as _flow_body_text
+        page_third = (self.page_height - self.config.positioning.margins.top * inch) / 3
 
-        for i, paragraph in enumerate(self.config.content.body):
+        paragraphs = self.config.content.body
+        i = 0
+        while i < len(paragraphs):
+            paragraph = paragraphs[i]
+
+            # Check if this is likely a heading (same logic as _flow_body_text)
+            is_heading = (paragraph.isupper() and
+                         len(paragraph.split()) <= 10 and
+                         not paragraph.rstrip().endswith(('.', '!', '?', ',')))
+
             # Wrap text to get actual lines
-            lines = self._wrap_text(paragraph, max_width)
+            lines = self._wrap_text(paragraph, max_width - (self.config.formatting.indent_size * inch if self.config.formatting.indent_paragraphs else 0))
 
             # Calculate space needed for entire paragraph
             space_needed = len(lines) * self.config.formatting.font_size * self.config.formatting.line_spacing
-            if i < len(self.config.content.body) - 1:
+            if i < len(paragraphs) - 1:
                 space_needed += self.config.formatting.paragraph_spacing
 
-            # If paragraph doesn't fit, start new page
+            # If this is a heading, apply orphan prevention logic
+            if is_heading and i < len(paragraphs) - 1:
+                # Get the next paragraph and calculate its space requirements
+                next_para = paragraphs[i + 1]
+                next_lines = self._wrap_text(next_para, max_width - (self.config.formatting.indent_size * inch if self.config.formatting.indent_paragraphs else 0))
+
+                # We want at least 4 lines of the next paragraph to appear with the heading
+                min_next_lines = min(4, max(2, len(next_lines) // 2))
+                space_for_next = min_next_lines * self.config.formatting.font_size * self.config.formatting.line_spacing
+
+                # Total space needed is heading + paragraph spacing + at least 4 lines of next paragraph
+                min_space_needed = space_needed + space_for_next
+
+                # Check both conditions: space needed AND bottom third rule
+                if current_y < bottom_margin + min_space_needed or current_y < page_third:
+                    # Move heading to next page
+                    temp_page_count += 1
+                    current_y = self.page_height - (self.config.positioning.margins.top * inch)
+
+            # Check if paragraph fits on current page
             if current_y < bottom_margin + space_needed:
                 temp_page_count += 1
                 current_y = self.page_height - (self.config.positioning.margins.top * inch)
 
             # Account for the space used by this paragraph
             current_y -= space_needed
+            i += 1
 
-        # Account for closing and signature (approximately 2 inches)
-        if current_y < (bottom_margin + 2 * inch):
+        # Account for closing and signature (with proper space calculation)
+        signature_space = 3 * inch  # Space for closing, signature area, and name/title
+        if current_y < bottom_margin + signature_space:
+            temp_page_count += 1
+            current_y = self.page_height - (self.config.positioning.margins.top * inch)
+
+        # Account for additional elements (P.S., enclosures, CC)
+        additional_space = 0
+        if self.config.content.postscript:
+            ps_lines = self._wrap_text(f"P.S. {self.config.content.postscript}", max_width)
+            additional_space += len(ps_lines) * self.config.formatting.font_size * 1.2 + self.config.formatting.paragraph_spacing
+
+        if self.config.content.enclosures:
+            additional_space += (len(self.config.content.enclosures) + 1) * self.config.formatting.font_size * 1.2
+
+        if self.config.content.cc:
+            additional_space += (len(self.config.content.cc) + 1) * self.config.formatting.font_size * 1.2
+
+        if additional_space > 0 and current_y - additional_space < bottom_margin:
             temp_page_count += 1
 
         return temp_page_count
@@ -756,18 +814,40 @@ class LetterPDFBuilder:
         x = self.config.positioning.margins.left * inch
         max_width = (self.page_width -
                     (self.config.positioning.margins.left + self.config.positioning.margins.right) * inch)
+        bottom_margin = 0.75 * inch
 
         # Postscript
         if self.config.content.postscript:
+            # Calculate space needed
+            ps_lines = self._wrap_text(f"P.S. {self.config.content.postscript}", max_width)
+            space_needed = (self.config.formatting.paragraph_spacing * 2 +
+                          len(ps_lines) * self.config.formatting.font_size * self.config.formatting.line_spacing)
+
+            # Check if we need a new page
+            if self.current_y < bottom_margin + space_needed:
+                self.page_count += 1
+                self._start_new_page()
+
             self.current_y -= self.config.formatting.paragraph_spacing * 2
-            # Wrap P.S. text if it's long
-            ps_lines = self._wrap_text(self.config.content.postscript, max_width)
-            for line in ps_lines:
+            self.canvas.drawString(x, self.current_y, "P.S. " + ps_lines[0] if ps_lines else "")
+            self.current_y -= self.config.formatting.font_size * self.config.formatting.line_spacing
+
+            # Draw remaining lines
+            for line in ps_lines[1:]:
                 self.canvas.drawString(x, self.current_y, line)
                 self.current_y -= self.config.formatting.font_size * self.config.formatting.line_spacing
 
         # Enclosures
         if self.config.content.enclosures:
+            # Calculate space needed
+            space_needed = (self.config.formatting.paragraph_spacing * 2 +
+                          self.config.formatting.font_size * 1.2 * (len(self.config.content.enclosures) + 1))
+
+            # Check if we need a new page
+            if self.current_y < bottom_margin + space_needed:
+                self.page_count += 1
+                self._start_new_page()
+
             self.current_y -= self.config.formatting.paragraph_spacing * 2
             self.canvas.drawString(x, self.current_y, "Enclosures:")
             for enc in self.config.content.enclosures:
@@ -776,6 +856,15 @@ class LetterPDFBuilder:
 
         # CC list
         if self.config.content.cc:
+            # Calculate space needed
+            space_needed = (self.config.formatting.paragraph_spacing * 2 +
+                          self.config.formatting.font_size * 1.2 * (len(self.config.content.cc) + 1))
+
+            # Check if we need a new page
+            if self.current_y < bottom_margin + space_needed:
+                self.page_count += 1
+                self._start_new_page()
+
             self.current_y -= self.config.formatting.paragraph_spacing * 2
             self.canvas.drawString(x, self.current_y, "cc:")
             for cc in self.config.content.cc:
