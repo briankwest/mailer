@@ -66,7 +66,7 @@
     },
     "content": {
       "salutation": "string",
-      "subject": "string|optional",
+      "subject": "string|optional|Include 'RE:' prefix if this is a reply",
       "body": [
         "paragraph1",
         "paragraph2",

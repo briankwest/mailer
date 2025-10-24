@@ -280,7 +280,8 @@ class LetterPDFBuilder:
 
         # Account for salutation and subject
         if self.config.content.subject:
-            current_y -= self.config.formatting.font_size * self.config.formatting.line_spacing
+            # Subject line plus extra spacing after it
+            current_y -= self.config.formatting.paragraph_spacing * 1.5
         current_y -= self.config.formatting.font_size * self.config.formatting.line_spacing * 1.5
 
         # Calculate space needed for body paragraphs
@@ -651,8 +652,9 @@ class LetterPDFBuilder:
                 bold_font = "Helvetica-Bold"  # Fallback
 
             self.canvas.setFont(bold_font, self.config.formatting.font_size)
-            self.canvas.drawString(x, self.current_y, f"RE: {self.config.content.subject}")
-            self.current_y -= self.config.formatting.font_size * self.config.formatting.line_spacing
+            self.canvas.drawString(x, self.current_y, self.config.content.subject)
+            # Add extra spacing after subject (paragraph spacing instead of just line spacing)
+            self.current_y -= self.config.formatting.paragraph_spacing * 1.5
             self.canvas.setFont(self.config.formatting.font_family,
                               self.config.formatting.font_size)
 
