@@ -1,0 +1,92 @@
+{
+  "available_fonts": {
+    "professional": [
+      {
+        "name": "Times-Roman",
+        "display": "Times New Roman",
+        "bold": "Times-Bold",
+        "italic": "Times-Italic",
+        "bold_italic": "Times-BoldItalic",
+        "recommended_for": "Formal letters, legal documents",
+        "characteristics": "Classic serif, highly readable"
+      },
+      {
+        "name": "Helvetica",
+        "display": "Helvetica",
+        "bold": "Helvetica-Bold",
+        "italic": "Helvetica-Oblique",
+        "bold_italic": "Helvetica-BoldOblique",
+        "recommended_for": "Business letters, modern correspondence",
+        "characteristics": "Clean sans-serif, professional"
+      },
+      {
+        "name": "Courier",
+        "display": "Courier",
+        "bold": "Courier-Bold",
+        "italic": "Courier-Oblique",
+        "bold_italic": "Courier-BoldOblique",
+        "recommended_for": "Technical documents, typewriter effect",
+        "characteristics": "Monospace, nostalgic feel"
+      }
+    ],
+    "modern": [
+      {
+        "name": "Helvetica-Light",
+        "display": "Helvetica Light",
+        "bold": "Helvetica",
+        "italic": "Helvetica-LightOblique",
+        "bold_italic": "Helvetica-Oblique",
+        "recommended_for": "Contemporary designs, minimal aesthetic",
+        "characteristics": "Light weight, modern appearance"
+      }
+    ]
+  },
+  "default": "Times-Roman",
+  "fallback": "Helvetica",
+  "size_ranges": {
+    "body": {
+      "min": 10,
+      "max": 14,
+      "default": 11,
+      "recommended": 11,
+      "comment": "11pt provides optimal readability"
+    },
+    "header": {
+      "min": 8,
+      "max": 12,
+      "default": 10,
+      "recommended": 10
+    },
+    "footer": {
+      "min": 8,
+      "max": 12,
+      "default": 10,
+      "recommended": 10
+    }
+  },
+  "line_spacing": {
+    "single": 1.0,
+    "one_and_half": 1.5,
+    "double": 2.0,
+    "default": 1.5,
+    "recommended": 1.5
+  },
+  "paragraph_spacing": {
+    "tight": 6,
+    "normal": 12,
+    "loose": 18,
+    "default": 12,
+    "recommended": 12
+  },
+  "special_characters": {
+    "supported": true,
+    "encoding": "UTF-8",
+    "note": "ReportLab supports most Unicode characters"
+  },
+  "font_features": {
+    "kerning": true,
+    "ligatures": false,
+    "small_caps": false,
+    "opentype_features": false
+  }
+}

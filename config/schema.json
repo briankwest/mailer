@@ -1,0 +1,157 @@
+{
+  "schema_version": "2.0",
+  "description": "JSON Schema for #10 double-window envelope letter generation with precise positioning",
+  "letter_config": {
+    "metadata": {
+      "type": "formal|business|congressional|personal",
+      "date": "YYYY-MM-DD",
+      "date_format": "full|abbreviated|custom",
+      "reference_id": "string"
+    },
+    "positioning": {
+      "unit": "inches",
+      "margins": {
+        "top": 1.25,
+        "bottom": 1.25,
+        "left": 1.25,
+        "right": 1.25
+      },
+      "return_address": {
+        "x": 0.5,
+        "y": 0.625,
+        "width": 3.5,
+        "height": 1.0,
+        "_comment": "Top window: 0.5\" from left, 0.625\" from top, 3.5\" × 1.0\""
+      },
+      "recipient_address": {
+        "x": 0.75,
+        "y": 2.0625,
+        "width": 4.0,
+        "height": 1.125,
+        "_comment": "Bottom window: 0.75\" from left, 2.0625\" from top, 4.0\" × 1.125\""
+      },
+      "date_position": {
+        "x": 4.875,
+        "y": 1.7,
+        "alignment": "left|center|right",
+        "_comment": "Positioned between return and recipient addresses, right-aligned recommended"
+      },
+      "body_start_y": 3.67,
+      "_comment": "Body starts at first fold line for optimal layout"
+    },
+    "return_address": {
+      "name": "string",
+      "title": "string|optional",
+      "organization": "string|optional",
+      "street_1": "string",
+      "street_2": "string|optional",
+      "city": "string",
+      "state": "string",
+      "zip": "string",
+      "country": "string|optional",
+      "phone": "string|optional",
+      "email": "string|optional"
+    },
+    "recipient_address": {
+      "honorific": "string|optional",
+      "name": "string",
+      "title": "string|optional",
+      "organization": "string|optional",
+      "street_1": "string",
+      "street_2": "string|optional",
+      "city": "string",
+      "state": "string",
+      "zip": "string",
+      "country": "string|optional"
+    },
+    "content": {
+      "salutation": "string",
+      "subject": "string|optional",
+      "body": [
+        "paragraph1",
+        "paragraph2",
+        "HEADING TEXT",
+        "...",
+        "_comment: Paragraphs are kept together, ALL CAPS text is treated as headings and won't be orphaned"
+      ],
+      "closing": "string",
+      "signature": {
+        "type": "image|typed",
+        "image_path": "string|optional",
+        "width": 2.0,
+        "height": 0.75,
+        "typed_name": "string",
+        "title": "string|optional"
+      },
+      "postscript": "string|optional",
+      "enclosures": ["string|optional"],
+      "cc": ["string|optional"]
+    },
+    "formatting": {
+      "font_family": "Times-Roman|Helvetica|Courier",
+      "font_size": 10,
+      "line_spacing": 1.5,
+      "paragraph_spacing": 12,
+      "justify_body": false,
+      "indent_paragraphs": true,
+      "indent_size": 0.5,
+      "_comment": "Font size 11 recommended for readability"
+    },
+    "fold_lines": {
+      "enabled": true,
+      "positions": [3.67, 7.33],
+      "style": {
+        "line_length_mm": 4,
+        "margin_offset_mm": 3,
+        "color": "#CCCCCC",
+        "line_width": 0.5,
+        "line_style": "solid"
+      },
+      "_comment": "Standard tri-fold positions for #10 envelopes"
+    },
+    "header": {
+      "page_1": {
+        "enabled": false,
+        "left": "",
+        "center": "",
+        "right": ""
+      },
+      "subsequent": {
+        "enabled": true,
+        "left": "{recipient_name}",
+        "center": "Page {page}",
+        "right": "{formatted_date}"
+      },
+      "font_size": 10,
+      "color": "#333333",
+      "line_below": true
+    },
+    "footer": {
+      "enabled": true,
+      "left": "",
+      "center": "Page {page} of {total}",
+      "right": "",
+      "font_size": 10,
+      "color": "#666666",
+      "line_above": true
+    },
+    "page_settings": {
+      "paper_size": "letter",
+      "orientation": "portrait",
+      "page_numbers": {
+        "show": true,
+        "position": "bottom_center",
+        "start_on_page": 1
+      }
+    }
+  },
+  "features": {
+    "paragraph_integrity": "Paragraphs are never split across pages",
+    "heading_orphan_prevention": "ALL CAPS text is treated as headings and requires 4+ lines of following content or moves to next page",
+    "heading_detection": "Text that is ALL CAPS, 10 words or less, and doesn't end with punctuation is treated as a heading",
+    "text_wrapping": "All text including P.S. wraps within margins",
+    "signature_spacing": "Optimized spacing between closing, signature, and name",
+    "page_utilization": "Uses space down to 0.75\" from bottom",
+    "multi_page_support": "Automatic page breaks with proper headers/footers"
+  }
+}

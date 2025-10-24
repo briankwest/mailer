@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Project specific
+output/*.pdf
+assets/signatures/*.png
+assets/logos/*.png
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Test outputs
+tests/test_outputs/
+*.test.pdf
