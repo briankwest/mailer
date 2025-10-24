@@ -83,7 +83,7 @@
         "typed_name": "string",
         "title": "string|optional"
       },
-      "postscript": "string|optional",
+      "postscript": "string|optional|Include 'P.S.' prefix if desired",
       "enclosures": ["string|optional"],
       "cc": ["string|optional"]
     },

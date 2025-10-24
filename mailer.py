@@ -345,7 +345,7 @@ class LetterPDFBuilder:
         # Account for additional elements (P.S., enclosures, CC)
         additional_space = 0
         if self.config.content.postscript:
-            ps_lines = self._wrap_text(f"P.S. {self.config.content.postscript}", max_width)
+            ps_lines = self._wrap_text(self.config.content.postscript, max_width)
             additional_space += len(ps_lines) * self.config.formatting.font_size * 1.2 + self.config.formatting.paragraph_spacing
 
         if self.config.content.enclosures:
@@ -820,8 +820,8 @@ class LetterPDFBuilder:
 
         # Postscript
         if self.config.content.postscript:
-            # Calculate space needed
-            ps_lines = self._wrap_text(f"P.S. {self.config.content.postscript}", max_width)
+            # Calculate space needed - use postscript as-is (user controls P.S. prefix)
+            ps_lines = self._wrap_text(self.config.content.postscript, max_width)
             space_needed = (self.config.formatting.paragraph_spacing * 2 +
                           len(ps_lines) * self.config.formatting.font_size * self.config.formatting.line_spacing)
 
@@ -831,11 +831,9 @@ class LetterPDFBuilder:
                 self._start_new_page()
 
             self.current_y -= self.config.formatting.paragraph_spacing * 2
-            self.canvas.drawString(x, self.current_y, "P.S. " + ps_lines[0] if ps_lines else "")
-            self.current_y -= self.config.formatting.font_size * self.config.formatting.line_spacing
 
-            # Draw remaining lines
-            for line in ps_lines[1:]:
+            # Draw all lines of postscript
+            for line in ps_lines:
                 self.canvas.drawString(x, self.current_y, line)
                 self.current_y -= self.config.formatting.font_size * self.config.formatting.line_spacing
 
