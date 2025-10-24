@@ -1,0 +1,160 @@
+{
+  "metadata": {
+    "type": "business",
+    "date": "2025-10-24",
+    "date_format": "full",
+    "reference_id": "MAX_ADDR_004"
+  },
+  "positioning": {
+    "unit": "inches",
+    "margins": {
+      "top": 1.25,
+      "bottom": 1.25,
+      "left": 1.25,
+      "right": 1.25
+    },
+    "return_address": {
+      "x": 0.5,
+      "y": 0.625,
+      "width": 3.5,
+      "height": 1.0
+    },
+    "recipient_address": {
+      "x": 0.75,
+      "y": 2.0625,
+      "width": 4.0,
+      "height": 1.125
+    },
+    "date_position": {
+      "x": 4.875,
+      "y": 1.7,
+      "alignment": "right"
+    },
+    "body_start_y": 3.67
+  },
+  "return_address": {
+    "name": "Dr. Christopher Montgomery-Richardson III",
+    "title": "Senior Executive Vice President of Operations",
+    "organization": "International Consolidated Enterprises Corporation",
+    "street_1": "12345 North Industrial Boulevard Extension",
+    "street_2": "Corporate Headquarters Complex Building A-7",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94105-1234",
+    "phone": "(415) 555-0199",
+    "email": "cmontgomery-richardson@intl-consolidated.com"
+  },
+  "recipient_address": {
+    "honorific": "Her Excellency",
+    "name": "Ambassador Elizabeth Catherine Worthington-Smythe",
+    "title": "Director General of International Affairs & Relations",
+    "organization": "Global Strategic Development Foundation International",
+    "street_1": "9876 South Constitution Avenue Northwest",
+    "street_2": "International Trade Center Building, Suite 5000-B",
+    "city": "Washington",
+    "state": "DC",
+    "zip": "20004-1776"
+  },
+  "content": {
+    "salutation": "Dear Ambassador Worthington-Smythe",
+    "subject": "Maximum Address Length Envelope Window Alignment Test",
+    "body": [
+      "This letter serves as a comprehensive test of the address block formatting system when utilizing maximum-length names, titles, and addresses. The purpose is to ensure that even the longest reasonable addresses will properly align within the standard #10 double-window envelope specifications.",
+
+      "ADDRESS BLOCK TESTING PARAMETERS",
+
+      "The return address block in the upper window must accommodate lengthy personal names including hyphenated surnames, extensive professional titles, long organization names, and multi-line street addresses. The current configuration allocates a 3.5\" × 1.0\" window positioned 0.5\" from the left edge and 0.625\" from the top edge of the page.",
+
+      "Similarly, the recipient address block must fit within the lower window measuring 4.0\" × 1.125\", positioned 0.75\" from the left edge and 2.0625\" from the top edge. This window must accommodate honorifics, lengthy names with multiple components, professional titles that span significant character counts, and complex organizational hierarchies.",
+
+      "FORMATTING VALIDATION",
+
+      "The text rendering engine must properly handle line wrapping within the constrained space of each window. Font size adjustments may be necessary for exceptionally long address components, though maintaining readability is paramount. The current implementation uses the standard 11-point font for address blocks, with automatic sizing adjustments if overflow is detected.",
+
+      "Multi-line components such as street addresses must stack properly without exceeding the vertical boundaries of their respective windows. The system should gracefully handle edge cases where address components approach or reach maximum postal service lengths.",
+
+      "ENVELOPE WINDOW ALIGNMENT VERIFICATION",
+
+      "Visual inspection of the generated PDF should confirm that all address text remains fully visible through the envelope windows when the letter is properly folded. The tri-fold positions at 3.67\" and 7.33\" from the top of the page must not obscure any critical address information.",
+
+      "The slight offset between the two windows (0.25\" horizontal, 1.4375\" vertical) accommodates standard envelope manufacturing tolerances while ensuring reliable delivery address visibility. This test validates that even maximum-length addresses maintain proper alignment within these constraints.",
+
+      "POSTAL SERVICE COMPLIANCE",
+
+      "All address formatting must comply with USPS Publication 28 guidelines for business mail. This includes proper abbreviation usage, ZIP+4 formatting, and adherence to maximum line lengths. The system should automatically apply these formatting rules while preserving address accuracy.",
+
+      "International addresses may require additional lines for country names and postal codes in varying formats. The flexible height allocation within each window accommodates these variations without compromising domestic address formatting.",
+
+      "QUALITY ASSURANCE METRICS",
+
+      "Successful validation requires that all address components remain legible, properly positioned, and fully contained within their designated envelope windows. No text truncation, overlap, or positioning errors should occur regardless of address length or complexity.",
+
+      "This test case represents an extreme boundary condition unlikely to occur in normal usage but essential for system robustness. By validating proper handling of maximum-length addresses, we ensure reliable performance across all practical scenarios.",
+
+      "CONCLUSION",
+
+      "The successful rendering of this test letter with maximum-length address components validates the system's capability to handle all reasonable address formats. The precise positioning calculations and automatic text wrapping ensure professional presentation while maintaining envelope window compatibility."
+    ],
+    "closing": "Sincerely yours",
+    "signature": {
+      "type": "typed",
+      "typed_name": "Dr. Christopher Montgomery-Richardson III",
+      "title": "Senior Executive Vice President of Operations"
+    }
+  },
+  "formatting": {
+    "font_family": "Times-Roman",
+    "font_size": 11,
+    "line_spacing": 1.5,
+    "paragraph_spacing": 12,
+    "justify_body": false,
+    "indent_paragraphs": true,
+    "indent_size": 0.5
+  },
+  "fold_lines": {
+    "enabled": true,
+    "positions": [3.67, 7.33],
+    "style": {
+      "line_length_mm": 4,
+      "margin_offset_mm": 3,
+      "color": "#CCCCCC",
+      "line_width": 0.5,
+      "line_style": "solid"
+    }
+  },
+  "header": {
+    "page_1": {
+      "enabled": false,
+      "left": "",
+      "center": "",
+      "right": ""
+    },
+    "subsequent": {
+      "enabled": true,
+      "left": "Ambassador",
+      "center": "Page {page}",
+      "right": "{formatted_date}"
+    },
+    "font_size": 10,
+    "color": "#333333",
+    "line_below": true
+  },
+  "footer": {
+    "enabled": true,
+    "left": "",
+    "center": "Page {page} of {total}",
+    "right": "",
+    "font_size": 10,
+    "color": "#666666",
+    "line_above": true
+  },
+  "page_settings": {
+    "paper_size": "letter",
+    "orientation": "portrait",
+    "page_numbers": {
+      "show": true,
+      "position": "bottom_center",
+      "start_on_page": 1
+    }
+  }
+}

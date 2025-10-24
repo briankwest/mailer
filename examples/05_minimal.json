@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "type": "personal",
+    "date": "2025-10-24",
+    "date_format": "abbreviated",
+    "reference_id": "MIN_005"
+  },
+  "positioning": {
+    "unit": "inches",
+    "margins": {
+      "top": 1.25,
+      "bottom": 1.25,
+      "left": 1.25,
+      "right": 1.25
+    },
+    "return_address": {
+      "x": 0.5,
+      "y": 0.625,
+      "width": 3.5,
+      "height": 1.0
+    },
+    "recipient_address": {
+      "x": 0.75,
+      "y": 2.0625,
+      "width": 4.0,
+      "height": 1.125
+    },
+    "date_position": {
+      "x": 4.875,
+      "y": 1.7,
+      "alignment": "right"
+    },
+    "body_start_y": 3.67
+  },
+  "return_address": {
+    "name": "John Doe",
+    "street_1": "123 Main St",
+    "city": "Anytown",
+    "state": "ST",
+    "zip": "12345"
+  },
+  "recipient_address": {
+    "name": "Jane Smith",
+    "street_1": "456 Oak Ave",
+    "city": "Somewhere",
+    "state": "ST",
+    "zip": "67890"
+  },
+  "content": {
+    "salutation": "Dear Jane",
+    "body": [
+      "This is a minimal test letter with only the required fields.",
+
+      "Thank you."
+    ],
+    "closing": "Sincerely",
+    "signature": {
+      "type": "typed",
+      "typed_name": "John Doe"
+    }
+  },
+  "formatting": {
+    "font_family": "Helvetica",
+    "font_size": 11,
+    "line_spacing": 1.5,
+    "paragraph_spacing": 12,
+    "justify_body": false,
+    "indent_paragraphs": true,
+    "indent_size": 0.5
+  },
+  "fold_lines": {
+    "enabled": true,
+    "positions": [3.67, 7.33],
+    "style": {
+      "line_length_mm": 4,
+      "margin_offset_mm": 3,
+      "color": "#CCCCCC",
+      "line_width": 0.5,
+      "line_style": "solid"
+    }
+  },
+  "header": {
+    "page_1": {
+      "enabled": false,
+      "left": "",
+      "center": "",
+      "right": ""
+    },
+    "subsequent": {
+      "enabled": false,
+      "left": "",
+      "center": "",
+      "right": ""
+    },
+    "font_size": 10,
+    "color": "#333333",
+    "line_below": false
+  },
+  "footer": {
+    "enabled": false,
+    "left": "",
+    "center": "",
+    "right": "",
+    "font_size": 10,
+    "color": "#666666",
+    "line_above": false
+  },
+  "page_settings": {
+    "paper_size": "letter",
+    "orientation": "portrait",
+    "page_numbers": {
+      "show": false,
+      "position": "bottom_center",
+      "start_on_page": 1
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "type": "business",
+    "date": "2025-10-24",
+    "date_format": "full",
+    "reference_id": "FONT_006"
+  },
+  "positioning": {
+    "unit": "inches",
+    "margins": {
+      "top": 1.25,
+      "bottom": 1.25,
+      "left": 1.25,
+      "right": 1.25
+    },
+    "return_address": {
+      "x": 0.5,
+      "y": 0.625,
+      "width": 3.5,
+      "height": 1.0
+    },
+    "recipient_address": {
+      "x": 0.75,
+      "y": 2.0625,
+      "width": 4.0,
+      "height": 1.125
+    },
+    "date_position": {
+      "x": 4.875,
+      "y": 1.7,
+      "alignment": "right"
+    },
+    "body_start_y": 3.67
+  },
+  "return_address": {
+    "name": "Technical Documentation Team",
+    "organization": "Typography Testing Lab",
+    "street_1": "8900 Font Street",
+    "city": "Type City",
+    "state": "TX",
+    "zip": "75001-2345",
+    "phone": "(214) 555-0142",
+    "email": "fonts@typographylab.com"
+  },
+  "recipient_address": {
+    "name": "Design Review Board",
+    "organization": "Professional Letters Institute",
+    "street_1": "567 Document Drive",
+    "street_2": "Suite 100",
+    "city": "Austin",
+    "state": "TX",
+    "zip": "78701-4567"
+  },
+  "content": {
+    "salutation": "Dear Review Board",
+    "subject": "Font Testing and Typography Demonstration - Courier Monospace",
+    "body": [
+      "This letter demonstrates the Courier font family, which provides a monospace typewriter-style appearance. Courier is often used for technical documentation, code listings, and situations where character alignment is critical.",
+
+      "MONOSPACE CHARACTERISTICS",
+
+      "In monospace fonts, every character occupies the same horizontal space. This means that 'i' takes up the same width as 'W'. This property makes Courier excellent for:",
+
+      "1. Tables and columnar data alignment",
+      "2. ASCII art and diagrams",
+      "3. Code snippets and technical content",
+      "4. Forms requiring precise spacing",
+      "5. Legal documents requiring traditional appearance",
+
+      "CHARACTER ALIGNMENT DEMONSTRATION",
+
+      "Name            Department      Extension",
+      "============================================",
+      "John Smith      Engineering     x5234",
+      "Jane Doe        Marketing       x5235",
+      "Bob Johnson     Sales           x5236",
+      "Alice Williams  Support         x5237",
+
+      "CODE EXAMPLE",
+
+      "function generateLetter(data) {",
+      "    const letter = new PDFDocument();",
+      "    letter.addPage();",
+      "    letter.setFont('Courier');",
+      "    letter.drawText(data.content);",
+      "    return letter.save();",
+      "}",
+
+      "READABILITY CONSIDERATIONS",
+
+      "While Courier provides excellent character alignment, it may reduce reading speed for long passages of text compared to proportional fonts. The fixed width can create irregular spacing between words and may appear less polished for formal business correspondence.",
+
+      "However, Courier remains an excellent choice for specific use cases where its unique properties provide functional benefits. The consistent character width ensures that formatted text maintains its structure regardless of the viewing or printing environment.",
+
+      "COMPARISON WITH OTHER FONTS",
+
+      "Unlike Times-Roman (serif) or Helvetica (sans-serif), Courier's monospace design prioritizes function over form. While Times-Roman optimizes for readability in long texts and Helvetica provides clean modern appearance, Courier excels in technical precision.",
+
+      "For formal business letters, Times-Roman or Helvetica typically provide better overall appearance for most professional correspondence. This test letter uses Courier to demonstrate its distinctive characteristics and appropriate use cases.",
+
+      "CONCLUSION",
+
+      "This font test validates that the letter generation system properly handles different font families, including monospace fonts like Courier. The system maintains proper positioning, line spacing, and page breaks regardless of the selected typeface."
+    ],
+    "closing": "Respectfully submitted",
+    "signature": {
+      "type": "typed",
+      "typed_name": "Technical Documentation Team",
+      "title": "Typography Testing Laboratory"
+    },
+    "postscript": "P.S. Additional font samples using Times-Roman and Helvetica are available in separate test letters for comprehensive typography validation."
+  },
+  "formatting": {
+    "font_family": "Courier",
+    "font_size": 10,
+    "line_spacing": 1.5,
+    "paragraph_spacing": 12,
+    "justify_body": false,
+    "indent_paragraphs": false,
+    "indent_size": 0
+  },
+  "fold_lines": {
+    "enabled": true,
+    "positions": [3.67, 7.33],
+    "style": {
+      "line_length_mm": 4,
+      "margin_offset_mm": 3,
+      "color": "#CCCCCC",
+      "line_width": 0.5,
+      "line_style": "solid"
+    }
+  },
+  "header": {
+    "page_1": {
+      "enabled": false,
+      "left": "",
+      "center": "",
+      "right": ""
+    },
+    "subsequent": {
+      "enabled": true,
+      "left": "Design Review Board",
+      "center": "Page {page}",
+      "right": "{formatted_date}"
+    },
+    "font_size": 9,
+    "color": "#333333",
+    "line_below": true
+  },
+  "footer": {
+    "enabled": true,
+    "left": "Font Test",
+    "center": "Page {page} of {total}",
+    "right": "Courier Demo",
+    "font_size": 9,
+    "color": "#666666",
+    "line_above": true
+  },
+  "page_settings": {
+    "paper_size": "letter",
+    "orientation": "portrait",
+    "page_numbers": {
+      "show": true,
+      "position": "bottom_center",
+      "start_on_page": 1
+    }
+  }
+}

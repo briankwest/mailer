@@ -1,0 +1,129 @@
+{
+  "metadata": {
+    "type": "business",
+    "date": "2025-10-24",
+    "date_format": "full",
+    "reference_id": "TEST_001"
+  },
+  "positioning": {
+    "unit": "inches",
+    "margins": {
+      "top": 1.25,
+      "bottom": 1.25,
+      "left": 1.25,
+      "right": 1.25
+    },
+    "return_address": {
+      "x": 0.5,
+      "y": 0.625,
+      "width": 3.5,
+      "height": 1.0
+    },
+    "recipient_address": {
+      "x": 0.75,
+      "y": 2.0625,
+      "width": 4.0,
+      "height": 1.125
+    },
+    "date_position": {
+      "x": 4.875,
+      "y": 1.7,
+      "alignment": "right"
+    },
+    "body_start_y": 3.67
+  },
+  "return_address": {
+    "name": "Sarah Johnson",
+    "title": "Marketing Director",
+    "organization": "Innovative Solutions Inc.",
+    "street_1": "500 Technology Drive",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94105-1234",
+    "phone": "(415) 555-0100",
+    "email": "sjohnson@innovativesolutions.com"
+  },
+  "recipient_address": {
+    "name": "Michael Chen",
+    "title": "Vice President of Operations",
+    "organization": "Global Manufacturing Corp",
+    "street_1": "1200 Industrial Parkway",
+    "street_2": "Building A, Suite 300",
+    "city": "Chicago",
+    "state": "IL",
+    "zip": "60601-5678"
+  },
+  "content": {
+    "salutation": "Dear Mr. Chen",
+    "subject": "Partnership Proposal for Q1 2026",
+    "body": [
+      "I am writing to follow up on our productive meeting last Tuesday regarding the potential partnership between Innovative Solutions and Global Manufacturing Corp. The synergies between our organizations present an exciting opportunity for mutual growth and innovation.",
+      "As discussed, our proprietary supply chain optimization software has demonstrated remarkable results with similar manufacturing operations. Our recent deployment at TechManufacturing resulted in a 23% reduction in inventory costs and a 15% improvement in on-time deliveries within the first quarter of implementation.",
+      "I am pleased to present our comprehensive proposal, which includes a detailed implementation timeline, projected ROI analysis, and customization options specific to your operational requirements. Our team has carefully considered the unique challenges you mentioned during our meeting and developed targeted solutions.",
+      "We are prepared to begin with a pilot program in your Chicago facility, allowing you to experience the benefits firsthand with minimal initial investment. This approach has proven successful with our other enterprise clients and provides valuable metrics for scaling across your entire operation.",
+      "I would appreciate the opportunity to discuss this proposal in detail at your earliest convenience. Our implementation team is available for a demonstration the week of November 11th, should that align with your schedule.",
+      "Thank you for considering Innovative Solutions as your technology partner. I am confident that our collaboration will drive significant value for both organizations."
+    ],
+    "closing": "Best regards",
+    "signature": {
+      "type": "typed",
+      "typed_name": "Sarah Johnson",
+      "title": "Marketing Director"
+    }
+  },
+  "formatting": {
+    "font_family": "Helvetica",
+    "font_size": 11,
+    "line_spacing": 1.5,
+    "paragraph_spacing": 12,
+    "justify_body": false,
+    "indent_paragraphs": true,
+    "indent_size": 0.5
+  },
+  "fold_lines": {
+    "enabled": true,
+    "positions": [3.67, 7.33],
+    "style": {
+      "line_length_mm": 4,
+      "margin_offset_mm": 3,
+      "color": "#CCCCCC",
+      "line_width": 0.5,
+      "line_style": "solid"
+    }
+  },
+  "header": {
+    "page_1": {
+      "enabled": false,
+      "left": "",
+      "center": "",
+      "right": ""
+    },
+    "subsequent": {
+      "enabled": true,
+      "left": "Mr. Chen",
+      "center": "Page {page}",
+      "right": "{formatted_date}"
+    },
+    "font_size": 10,
+    "color": "#333333",
+    "line_below": true
+  },
+  "footer": {
+    "enabled": true,
+    "left": "",
+    "center": "Page {page} of {total}",
+    "right": "",
+    "font_size": 10,
+    "color": "#666666",
+    "line_above": true
+  },
+  "page_settings": {
+    "paper_size": "letter",
+    "orientation": "portrait",
+    "page_numbers": {
+      "show": true,
+      "position": "bottom_center",
+      "start_on_page": 1
+    }
+  }
+}
