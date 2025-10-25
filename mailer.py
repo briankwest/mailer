@@ -75,10 +75,10 @@ class Positioning(BaseModel):
     """Element positioning configuration"""
     unit: str = "inches"
     margins: Margins = Margins()
-    return_address: AddressPosition
-    recipient_address: AddressPosition
-    date_position: DatePosition = DatePosition()
-    body_start_y: float = 3.5
+    return_address: AddressPosition = AddressPosition(x=0.5, y=0.625, width=3.5, height=1.0)
+    recipient_address: AddressPosition = AddressPosition(x=0.75, y=2.0625, width=4.0, height=1.125)
+    date_position: DatePosition = DatePosition(x=4.875, y=1.7, alignment="right")
+    body_start_y: float = 3.67
 
 
 class Address(BaseModel):
@@ -156,8 +156,8 @@ class HeaderContent(BaseModel):
 
 class Header(BaseModel):
     """Header configuration"""
-    page_1: HeaderContent
-    subsequent: HeaderContent
+    page_1: HeaderContent = HeaderContent(enabled=False)
+    subsequent: HeaderContent = HeaderContent()
     font_size: int = 10
     color: str = "#333333"
     line_below: bool = True
@@ -190,15 +190,15 @@ class PageSettings(BaseModel):
 
 class LetterConfig(BaseModel):
     """Complete letter configuration"""
-    metadata: Metadata
-    positioning: Positioning
+    metadata: Metadata = Metadata()
+    positioning: Positioning = Positioning()
     return_address: Address
     recipient_address: Address
     content: Content
-    formatting: Formatting
+    formatting: Formatting = Formatting()
     fold_lines: FoldLines = FoldLines()
-    header: Header
-    footer: Footer
+    header: Header = Header()
+    footer: Footer = Footer()
     page_settings: PageSettings = PageSettings()
 
 

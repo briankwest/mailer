@@ -1,12 +1,13 @@
 {
   "schema_version": "2.0",
   "description": "JSON Schema for #10 double-window envelope letter generation with precise positioning",
+  "_note": "Only return_address, recipient_address, and content (salutation, body, closing, signature.typed_name) are REQUIRED. All other fields are optional with sensible defaults.",
   "letter_config": {
     "metadata": {
-      "type": "formal|business|congressional|personal",
-      "date": "YYYY-MM-DD",
-      "date_format": "full|abbreviated|custom",
-      "reference_id": "string"
+      "type": "formal|business|congressional|personal|optional (default: business)",
+      "date": "YYYY-MM-DD|optional (defaults to today)",
+      "date_format": "full|abbreviated|custom|optional (default: full)",
+      "reference_id": "string|optional (default: letter_001)"
     },
     "positioning": {
       "unit": "inches",
